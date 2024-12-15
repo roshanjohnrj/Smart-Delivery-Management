@@ -230,7 +230,7 @@ const removeItem = (index) => {
       {/* Modal for Add and Edit Partner */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-1/2 max-h-[80vh] overflow-y-auto">
+          <div className="bg-white p-6 rounded-lg  w-10/12 sm:w-1/2 max-h-[80vh] overflow-y-auto">
             <h2 className="text-2xl mb-4">
               {/* {order._id ? "Edit Partner" : "Add New Partner"} */}
               Add New Order

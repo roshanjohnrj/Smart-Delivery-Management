@@ -276,7 +276,7 @@ function Partners() {
       {/* Modal for Add and Edit Partner */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-1/2">
+          <div className="bg-white p-6 rounded-lg  w-10/12 sm:w-1/2">
             <h2 className="text-2xl mb-4">
               {partner && partner._id ? "Edit Partner" : "Add New Partner"}
             </h2>
