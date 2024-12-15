@@ -83,7 +83,7 @@ function Dashboard() {
         {/* Recent Assignments */}
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-bold mb-4">Recent Assignments</h2>
-          {dashboardData.recentAssignments.length >0 ? (
+          {dashboardData?.recentAssignments?.length >0 ? (
           <table className="w-full">
             <thead>
               <tr className="bg-gray-100 text-left">
