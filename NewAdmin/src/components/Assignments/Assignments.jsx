@@ -107,7 +107,9 @@ function Assignments() {
         <MetricCard
           icon={Package}
           label="Avg. Assign Time"
-          value={ typeof assignmentsData.avgTime === "object" ? `${assignmentsData.avgTime.averageTime} mins` : `${assignmentsData.avgTime} mins` }
+          value={ assignmentsData?.avgTime && typeof assignmentsData.avgTime === 'object'
+            ? `${parseFloat(assignmentsData.avgTime.averageTime || 0).toFixed(3)} mins`
+            : `${parseFloat(assignmentsData?.avgTime || 0).toFixed(3)} mins` }
           color="text-orange-500"
         />
       </div>
