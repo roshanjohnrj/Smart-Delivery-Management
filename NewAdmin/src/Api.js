@@ -1,12 +1,11 @@
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 class DashboardService {
 
-  
-
- 
     async fetchDashboardData() {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      // const backendUrl = import.meta.env.VITE_BACKEND_URL;
       try {
         const response = await axios.get(`${backendUrl}/api/dashboard`);
         console.log(response.data)
@@ -17,40 +16,40 @@ class DashboardService {
     }
     
     async displayPartners(){
-      const response=await axios.get('/api/partners/display');
+      const response=await axios.get(`${backendUrl}/api/partners/display`);
       return response.data.data;
     }
 
     async addPartner(partner){
-      const response = await axios.post(`/api/partners/register`, partner);
+      const response = await axios.post(`${backendUrl}/api/partners/register`, partner);
       return response.data.data;
     }
 
     async updatePartner(partner){
-      const response = await axios.put(`/api/partners/update/${partner._id}`, partner);
+      const response = await axios.put(`${backendUrl}/api/partners/update/${partner._id}`, partner);
       return response.data.data;
     }
 
     async deletePartner(id){
-      const response = await axios.delete(`/api/partners/delete/${id}`);
+      const response = await axios.delete(`${backendUrl}/api/partners/delete/${id}`);
       return response.data;
     }
   
     //orders
     async fetchOrdersData(){
-      const response = await axios.get(`/api/orders/display`);
+      const response = await axios.get(`${backendUrl}/api/orders/display`);
       console.log(response.data.data)
       return response.data.data;
     }
 
     async addOrder(order){
-      const response=await axios.post(`/api/orders/create`,order);
+      const response=await axios.post(`${backendUrl}/api/orders/create`,order);
       return response.data.data
     }
     
     //assigments
     async assign(){
-      const response=await axios.post(`/api/assignments/run`)
+      const response=await axios.post(`${backendUrl}/api/assignments/run`)
       return alert(response.data)
     }
 
