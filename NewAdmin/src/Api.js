@@ -5,7 +5,7 @@ class DashboardService {
  
     async fetchDashboardData() {
       try {
-        const response = await axios.get('/api/dashboard');
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/dashboard`);
         console.log(response.data)
         return response.data; 
       } catch (error) {
