@@ -181,13 +181,13 @@ function Partners() {
             setPartner({});
             setShowModal(true);
           }}
-          className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+          className="bg-blue-500 text-white px-4 py-2 rounded flex items-center "
         >
-          <Plus className="mr-2" /> Add Partner
+          <Plus className=" mr-2" /> Add Partner
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <MetricCard
           icon={UsersRound}
           label="Total Partners"
@@ -216,6 +216,7 @@ function Partners() {
 
       {/* Partners Table */}
       <div className="bg-white rounded-lg shadow">
+      <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-100">
             <tr>
@@ -269,6 +270,7 @@ function Partners() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Modal for Add and Edit Partner */}

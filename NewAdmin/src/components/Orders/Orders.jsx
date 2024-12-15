@@ -172,7 +172,7 @@ const removeItem = (index) => {
       </div>
 
       {/* metrics */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <MetricCard
           icon={Boxes}
           label="Total Orders"
@@ -200,6 +200,7 @@ const removeItem = (index) => {
       </div>
 
       <div className="bg-white rounded-lg shadow">
+      <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr>
@@ -224,11 +225,12 @@ const removeItem = (index) => {
             ))}
           </tbody>
         </table>
+        </div>  
       </div>
       {/* Modal for Add and Edit Partner */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-1/2">
+          <div className="bg-white p-6 rounded-lg w-1/2 overflow-auto">
             <h2 className="text-2xl mb-4">
               {/* {order._id ? "Edit Partner" : "Add New Partner"} */}
               Add New Order

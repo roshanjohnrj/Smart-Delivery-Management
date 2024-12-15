@@ -70,7 +70,7 @@ function Assignments() {
       </div>
        
       {/* Metrics Cards */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <MetricCard
           icon={TrendingUp}
           label="Total Assignments"
@@ -118,6 +118,7 @@ function Assignments() {
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-bold mb-4"> Assignments</h2>
         {assignmentsData.recentAssignments.length > 0 ? (
+         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="bg-gray-100 text-left">
@@ -151,6 +152,7 @@ function Assignments() {
               ))}
             </tbody>
           </table>
+          </div>
         ) : (
           <div className="text-gray-500">No recent assignments available.</div>
         )}
