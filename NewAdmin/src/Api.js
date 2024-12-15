@@ -8,7 +8,7 @@ class DashboardService {
       // const backendUrl = import.meta.env.VITE_BACKEND_URL;
       try {
         const response = await axios.get(`${backendUrl}/api/dashboard`);
-        console.log(response.data)
+        // console.log(response.data)
         return response.data; 
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -38,7 +38,7 @@ class DashboardService {
     //orders
     async fetchOrdersData(){
       const response = await axios.get(`${backendUrl}/api/orders/display`);
-      console.log(response.data.data)
+      // console.log(response.data.data)
       return response.data.data;
     }
 
