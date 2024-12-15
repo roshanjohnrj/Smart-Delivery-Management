@@ -51,7 +51,7 @@ function Dashboard() {
         <h1 className="text-3xl font-bold mb-6">Delivery Dashboard</h1>
         
         {/* Metrics Cards */}
-        <div className="grid grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <MetricCard
             icon={TrendingUp} 
             label="Total Orders" 
@@ -84,8 +84,9 @@ function Dashboard() {
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-bold mb-4">Recent Assignments</h2>
           {dashboardData?.recentAssignments?.length >0 ? (
+          <div className="overflow-x-auto">
           <table className="w-full">
-            <thead>
+              <thead>
               <tr className="bg-gray-100 text-left">
                 <th className="p-2">Order ID</th>                
                 <th className="p-2">Partner ID</th>
@@ -113,6 +114,8 @@ function Dashboard() {
               ))}
             </tbody>
           </table>
+          </div>
+
         ):(
          
             <div className="text-gray-500">No recent assignments available.</div>
