@@ -76,7 +76,7 @@ function Partners() {
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    if (name === "shiftType") {
+    if (name === "shiftType" && shiftMappings[value]) {
       // When shift is selected, update the start and end times based on shiftMappings
       const Shift = shiftMappings[value];
 
@@ -127,6 +127,10 @@ function Partners() {
         }));
       } else {
         // Add a new partner
+        if (!partner.name || !partner.email || !partner.status || !partner.areas.length || !partner.shift || !partner.phone) {
+          toast.error("Please fill in all required fields.");
+          return;
+        }
         const newPartner = await DashboardService.addPartner(partner);
         toast.success("Partner added successfully")
         console.log("Partner added successfully!");
@@ -187,25 +191,25 @@ function Partners() {
         <MetricCard
           icon={UsersRound}
           label="Total Partners"
-          value={partnersData.totalPartners}
+          value={partnersData?.totalPartners || 0}
           color="text-blue-500"
         />
         <MetricCard
           icon={Users}
           label="Active Partners"
-          value={partnersData.activePartners}
+          value={partnersData?.activePartners || 0}
           color="text-green-500"
         />
         <MetricCard
           icon={Star}
           label="Average Rating"
-          value={partnersData.avgRating}
+          value={partnersData?.avgRating || 0}
           color="text-purple-500"
         />
         <MetricCard
           icon={Package}
           label="Avg. Delivery Time"
-          value={partnersData.averageDeliveryTime}
+          value={partnersData?.averageDeliveryTime || 0}
           color="text-orange-500"
         />
       </div>
@@ -272,7 +276,7 @@ function Partners() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-1/2">
             <h2 className="text-2xl mb-4">
-              {partner._id ? "Edit Partner" : "Add New Partner"}
+              {partner && partner._id ? "Edit Partner" : "Add New Partner"}
             </h2>
             <div className="space-y-4">
               <input
