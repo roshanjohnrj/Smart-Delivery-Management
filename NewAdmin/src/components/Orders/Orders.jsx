@@ -39,6 +39,10 @@ function Orders() {
       setIsLoading(true);
       const data = await DashboardService.fetchDashboardData();
       const orders = await DashboardService.fetchOrdersData();
+      if (!data || !orders) {
+        setError('Invalid response data');
+        return;
+      }
       setOrdersData((prev) => ({
         ...data,
         ordersList: Array.isArray(orders) ? orders : [],
