@@ -45,18 +45,6 @@ function Dashboard() {
     return <div className="p-6 bg-gray-100 text-red-500">{error}</div>;
   }
 
-    // const metrics = {
-    //   totalOrders: 1205,
-    //   completedOrders: 1100,
-    //   activePartners: 42,
-    //   averageDeliveryTime: '45 mins'
-    // };
-  
-    // const recentOrders = [
-    //   { id: '001', customer: 'John Doe', status: 'delivered' },
-    //   { id: '002', customer: 'Jane Smith', status: 'picked' },
-    //   { id: '003', customer: 'Mike Johnson', status: 'assigned' }
-    // ];
   
     return (
       <div className="p-6 bg-gray-100">
@@ -67,27 +55,27 @@ function Dashboard() {
           <MetricCard
             icon={TrendingUp} 
             label="Total Orders" 
-            value={dashboardData.totalOrders} 
+            value={dashboardData?.totalOrders || 0} 
             color="text-blue-500" 
           />
           <MetricCard 
             icon={CheckCircle} 
             label="Completed Orders" 
-            value={dashboardData.completedOrders} 
+            value={dashboardData?.completedOrders || 0} 
             color="text-green-500" 
           />
           <MetricCard 
             icon={Users} 
             label="Active Partners" 
-            value={dashboardData.activePartners} 
+            value={dashboardData?.activePartners || 0} 
             color="text-purple-500" 
           />
           <MetricCard 
             icon={Package} 
             label="Avg. Assign Time" 
-            value={ typeof dashboardData.avgTime === 'object' 
-              ? `${parseFloat(dashboardData.avgTime.averageTime).toFixed(3)} mins` 
-              : `${parseFloat(dashboardData.avgTime).toFixed(3)} mins`} 
+            value={ dashboardData?.avgTime && typeof dashboardData.avgTime === 'object'
+              ? `${parseFloat(dashboardData.avgTime.averageTime || 0).toFixed(3)} mins`
+              : `${parseFloat(dashboardData?.avgTime || 0).toFixed(3)} mins`} 
             color="text-orange-500" 
           />
         </div>
