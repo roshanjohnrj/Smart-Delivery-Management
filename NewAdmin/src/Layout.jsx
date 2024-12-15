@@ -31,7 +31,7 @@ function Layout() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white p-4">
+      <div className="w-64 bg-gray-800 text-white p-4 md:w-64 transition-all duration-300">
         <h1 className="text-2xl font-bold mb-8">Delivery Management</h1>
         <nav className="space-y-4">
           {[
@@ -47,7 +47,7 @@ function Layout() {
                     ${currentPage === page ? "bg-gray-700" : ""}`}
             >
               <Icon size={20} />
-              <span>{label}</span>
+              <span className="hidden md:block">{label}</span>
             </button>
           ))}
         </nav>
