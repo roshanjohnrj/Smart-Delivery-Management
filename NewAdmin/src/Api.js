@@ -2,10 +2,13 @@ import axios from 'axios';
 
 class DashboardService {
 
+  
+
  
     async fetchDashboardData() {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/dashboard`);
+        const response = await axios.get(`${backendUrl}/api/dashboard`);
         console.log(response.data)
         return response.data; 
       } catch (error) {
