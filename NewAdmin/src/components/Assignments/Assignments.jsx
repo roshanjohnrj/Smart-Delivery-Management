@@ -58,7 +58,8 @@ function Assignments() {
               const data=await DashboardService.assign();
               toast.success("Assigned successfully")
             } catch (error) {
-              toast.error("Error Assigning..")
+              toast.error("Error Assigning..(No Active partners)")
+
             }
            
           }}

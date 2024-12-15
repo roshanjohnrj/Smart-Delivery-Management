@@ -50,7 +50,7 @@ class DashboardService {
     //assigments
     async assign(){
       const response=await axios.post(`${backendUrl}/api/assignments/run`)
-      return alert(response.data)
+      return response.data.data
     }
 
 
