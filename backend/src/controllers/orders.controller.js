@@ -87,7 +87,7 @@ const updateOrderStatus=asyncHandler(async (req,res)=>{
     throw new ApiError(400,"Order not Found!")
   }
   
-  const ValidateStatus=["pending","assigned","picked","delivered"]
+  const ValidateStatus=["pending","assigned","picked","delivered","cancelled"]
 
   if(!ValidateStatus.includes(status)){
     throw new ApiError(404,"Enter a valid status...")
