@@ -208,6 +208,8 @@ const removeItem = (index) => {
               <th className="p-3 text-left">Partner ID</th>
               <th className="p-3 text-left">Customer</th>
               <th className="p-3 text-left">Status</th>
+              <th className="p-3 text-left">Actions</th>
+
             </tr>
           </thead>
           <tbody>
@@ -221,6 +223,25 @@ const removeItem = (index) => {
                 </td>
                 <td className="p-3">{order.customer.name}</td>
                 <td className="p-3">{order.status}</td>
+                <td className="p-3">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => {
+                        setPartner(partner);
+                        setShowModal(true);
+                      }}
+                      className="text-blue-500 hover:bg-blue-100 p-1 rounded"
+                    >
+                      <Edit size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(partner._id)}
+                      className="text-red-500 hover:bg-red-100 p-1 rounded"
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
