@@ -173,6 +173,27 @@ function Orders() {
     setShowModal(true);
   };
 
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      // Update the status in the backend
+      const updatedOrder = await DashboardService.updateOrderStatus(id, { status: newStatus });
+  
+      // Update the UI with the new status
+      setOrdersData((prevData) => ({
+        ...prevData,
+        ordersList: prevData.ordersList.map((order) =>
+          order._id === id ? { ...order, status: newStatus } : order
+        ),
+      }));
+  
+      toast.success("Order status updated successfully");
+    } catch (err) {
+      console.error("Error updating order status:", err);
+      toast.error("Failed to update order status");
+    }
+  };
+  
+
 
   if (isLoading) {
     return <div className="p-6 bg-gray-100">Loading...</div>;
@@ -281,7 +302,20 @@ const removeItem = (index) => {
                     : "Not assigned"}
                 </td>
                 <td className="p-3">{order.customer.name}</td>
-                <td className="p-3">{order.status}</td>
+                <td className="p-3">
+              {/* Dropdown for Status */}
+              <select
+                value={order.status}
+                onChange={(e) => handleStatusChange(order._id, e.target.value)}
+                className="p-2 border rounded"
+              >
+                <option value="pending">Pending</option>
+                <option value="assigned">Assigned</option>
+                <option value="picked">Picked</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </td>
                 <td className="p-3">
                   <div className="flex space-x-2">
                     <button
