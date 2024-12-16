@@ -162,7 +162,35 @@ const assignmentHistory=asyncHandler(async (req,res)=>{
   )
 })
 
+const updateOrder=asyncHandler(async(req,res)=>{
+  const {id}=req.params;
+  const updates = req.body;
+
+  if (!id) {
+    throw new ApiError(400, "Order ID is required");
+  }
+
+  // Check if updates are provided
+  if (!updates || Object.keys(updates).length === 0) {
+    throw new ApiError(400, "No update fields provided");
+  }
+
+  // Find the order and update it
+  const updatedOrder = await Order.findByIdAndUpdate(
+    id,
+    { $set: updates }, // Set only the fields provided in the request
+    { new: true, runValidators: true } // Return the updated document and run validations
+  );
+  if (!updatedOrder) {
+    throw new ApiError(404, `Order with ID ${id} not found`);
+  }
+
+  res.status(200).json(new ApiResponse(200, updatedOrder, "Order updated successfully"));
+
+
+})
 
 
 
-export {displayAllOrders,createNewOrder,updateOrderStatus,deleteOrder,assignmentHistory}
+
+export {displayAllOrders,createNewOrder,updateOrderStatus,deleteOrder,assignmentHistory,updateOrder}

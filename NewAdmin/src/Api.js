@@ -46,6 +46,11 @@ class DashboardService {
       const response=await axios.post(`${backendUrl}/api/orders/create`,order);
       return response.data.data
     }
+
+    async updateOrder(id,order){
+      const response=await axios.put(`${backendUrl}/api/orders/update/${id}`,order)
+      return response.data.data
+    }
     
     //assigments
     async assign(){
