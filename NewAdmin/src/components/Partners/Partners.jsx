@@ -203,7 +203,7 @@ function Partners() {
         <MetricCard
           icon={Star}
           label="Average Rating"
-          value={partnersData?.avgRating || 0}
+          value={(partnersData?.avgRating || 0).toFixed(2)}
           color="text-purple-500"
         />
         <MetricCard
