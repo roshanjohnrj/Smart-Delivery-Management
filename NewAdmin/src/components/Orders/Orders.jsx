@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MetricCard } from "../MetricCard/MetricCard";
 import DashboardService from "../../Api.js";
-import { CheckCircle, Package, Boxes, Plus } from "lucide-react";
+import { CheckCircle, Package, Boxes, Plus,Edit,Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
 
 
@@ -32,6 +32,7 @@ function Orders() {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   //fetch data
   const fetchData = async () => {
