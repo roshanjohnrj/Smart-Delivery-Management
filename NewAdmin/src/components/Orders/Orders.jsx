@@ -291,7 +291,7 @@ const removeItem = (index) => {
                       <Edit size={20} />
                     </button>
                     <button
-                      onClick={() => handleDelete(partner._id)}
+                      onClick={() => handleDelete(order._id)}
                       className="text-red-500 hover:bg-red-100 p-1 rounded"
                     >
                       <Trash2 size={20} />

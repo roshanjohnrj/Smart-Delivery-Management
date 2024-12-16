@@ -52,6 +52,10 @@ class DashboardService {
       return response.data.data
     }
     
+    async deleteOrder(id){
+      const response=await axios.delete(`${backendUrl}/api/orders/delete/${id}`)
+      return response.data.message
+    }
     //assigments
     async assign(){
       const response=await axios.post(`${backendUrl}/api/assignments/run`)
