@@ -41,6 +41,7 @@ app.get("/api/dashboard", async (req, res) => {
       activePartners,
       totalOrders,
       completedOrders,
+      cancelledOrders,
       pendingOrders,
       recentAssignments,
       activeOrders,
@@ -56,6 +57,7 @@ app.get("/api/dashboard", async (req, res) => {
       DeliveryPartner.countDocuments({ status: "active" }),
       Order.countDocuments(),
       Order.countDocuments({ status: "delivered" }),
+      Order.countDocuments({status:"cancelled"}),
       Order.countDocuments({ status: "pending" }),
       // Order.find().populate('assignedTo','name').sort({createdAt:-1}).lean()
       Assignment.find().sort({createdAt:-1}),

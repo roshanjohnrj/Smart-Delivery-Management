@@ -10,6 +10,7 @@ function Orders() {
     totalOrders: 0,
     activeOrders: 0,
     completedOrders: 0,
+    cancelledOrders:0,
     ordersList: [],
   });
 
