@@ -16,7 +16,8 @@ const assignDeliveryPartner=asyncHandler(async (req,res)=>{
  
      //current time
      const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    
+     console.log("Current Time:", currentTime); ///
+
      const unassignedOrders=await Order.find({
        status:"pending",
        scheduledFor:{$lte:currentTime}
@@ -34,8 +35,12 @@ const assignDeliveryPartner=asyncHandler(async (req,res)=>{
        'shift.start':{$lte:currentTime},
        'shift.end':{$gte:currentTime}
      })
- 
+       
+     console.log("Active Partners Found:", activePartners);   //////
+
      if (!activePartners || activePartners.length === 0) {
+      console.error("No active partners available at this time.");  //////
+
        throw new ApiError(400, "No active partners available...");
      }
  
