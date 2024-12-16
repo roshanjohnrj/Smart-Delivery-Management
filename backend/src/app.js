@@ -87,6 +87,7 @@ app.get("/api/dashboard", async (req, res) => {
       activePartners,
       totalOrders,
       completedOrders,
+      cancelledOrders,
       pendingOrders,
       recentAssignments,
       activeOrders,
