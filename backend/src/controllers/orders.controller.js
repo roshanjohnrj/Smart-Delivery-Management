@@ -3,6 +3,7 @@ import {ApiError} from "../utils/ApiError.js";
 import { Order } from "../models/order.model.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import { Assignment } from "../models/assignment.model.js";
+import {DeliveryPartner} from "../models/deliveryPartner.model.js"
 
 
 
