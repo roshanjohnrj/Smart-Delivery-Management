@@ -94,26 +94,84 @@ function Orders() {
   };
   
 
-  const handleAdd = async (order) => {
+  // const handleAdd = async (order) => {
+  //   try {
+  //     const newOrder = await DashboardService.addOrder(order);
+  //     setShowModal(false);
+  //     toast.success("Order Added successfully")
+  //     setOrder();
+  //     setOrdersData((prevData) => ({
+  //       ...prevData,
+  //       ordersList: [...prevData.ordersList, newOrder],
+  //       totalOrders: prevData.totalOrders + 1,
+  //       activeOrders: ["assigned", "picked"].includes(newOrder.status)
+  //         ? prevData.activeOrders + 1
+  //         : prevData.activeOrders,
+  //     }));
+  //   } catch (err) {
+  //     toast.error("Error adding order")
+  //     console.error("Error adding order:", err);
+  //     setError("Failed to add order");
+  //   }
+  // };
+
+  const handleAddOrEdit = async () => {
     try {
-      const newOrder = await DashboardService.addOrder(order);
+      if (isEditing) {
+        // Update the order
+        const updatedOrder = await DashboardService.updateOrder(order._id, order);
+        toast.success("Order updated successfully");
+        setOrdersData((prevData) => ({
+          ...prevData,
+          ordersList: prevData.ordersList.map((o) =>
+            o._id === updatedOrder._id ? updatedOrder : o
+          ),
+        }));
+      } else {
+        // Add a new order
+        const newOrder = await DashboardService.addOrder(order);
+        toast.success("Order added successfully");
+        setOrdersData((prevData) => ({
+          ...prevData,
+          ordersList: [...prevData.ordersList, newOrder],
+          totalOrders: prevData.totalOrders + 1,
+          activeOrders: ["assigned", "picked"].includes(newOrder.status)
+            ? prevData.activeOrders + 1
+            : prevData.activeOrders,
+        }));
+      }
       setShowModal(false);
-      toast.success("Order Added successfully")
-      setOrder();
-      setOrdersData((prevData) => ({
-        ...prevData,
-        ordersList: [...prevData.ordersList, newOrder],
-        totalOrders: prevData.totalOrders + 1,
-        activeOrders: ["assigned", "picked"].includes(newOrder.status)
-          ? prevData.activeOrders + 1
-          : prevData.activeOrders,
-      }));
+      setOrder({});
+      setIsEditing(false);
     } catch (err) {
-      toast.error("Error adding order")
-      console.error("Error adding order:", err);
-      setError("Failed to add order");
+      toast.error(isEditing ? "Error updating order" : "Error adding order");
+      console.error("Error in handleAddOrEdit:", err);
     }
   };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this order?")) return;
+
+    try {
+      await DashboardService.deleteOrder(id);
+      toast.success("Order deleted successfully");
+      setOrdersData((prevData) => ({
+        ...prevData,
+        ordersList: prevData.ordersList.filter((order) => order._id !== id),
+        totalOrders: prevData.totalOrders - 1,
+      }));
+    } catch (err) {
+      toast.error("Error deleting order");
+      console.error("Error in handleDelete:", err);
+    }
+  };
+
+  const handleEdit = (order) => {
+    setOrder(order); // Load the selected order into state
+    setIsEditing(true);
+    setShowModal(true);
+  };
+
 
   if (isLoading) {
     return <div className="p-6 bg-gray-100">Loading...</div>;
@@ -226,10 +284,7 @@ const removeItem = (index) => {
                 <td className="p-3">
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => {
-                        setPartner(partner);
-                        setShowModal(true);
-                      }}
+                      onClick={() => handleEdit(order)}
                       className="text-blue-500 hover:bg-blue-100 p-1 rounded"
                     >
                       <Edit size={20} />
@@ -253,8 +308,8 @@ const removeItem = (index) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg  w-10/12 sm:w-1/2 max-h-[80vh] overflow-y-auto">
             <h2 className="text-2xl mb-4">
-              {/* {order._id ? "Edit Partner" : "Add New Partner"} */}
-              Add New Order
+            {isEditing ? "Edit Order" : "Add New Order"}
+              {/* Add New Order */}
             </h2>
             <div className="space-y-4">
               <input
@@ -351,11 +406,11 @@ const removeItem = (index) => {
                 Cancel
               </button>
               <button
-                onClick={() => handleAdd(order)}
+                onClick={handleAddOrEdit}
                 className="px-4 py-2 bg-blue-500 text-white rounded"
               >
-                {/* {order._id ? "Update" : "Add"} */}
-                Add
+                 {isEditing ? "Update Order" : "Save Order"}
+                {/* Add */}
               </button>
             </div>
           </div>
