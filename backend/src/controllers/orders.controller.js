@@ -98,13 +98,13 @@ const updateOrderStatus=asyncHandler(async (req,res)=>{
   const partner = await DeliveryPartner.findById(updatedOrder.assignedTo);
   
   if (status === 'delivered') {
-    partner?.metrics.completedOrders += 1;
-    partner?.currentLoad= Math.max(0,partner.currentLoad-1);
-    partner?.metrics.rating = calculateNewRating(partner.metrics);
+    partner.metrics.completedOrders += 1;
+    partner.currentLoad= Math.max(0,partner.currentLoad-1);
+    partner.metrics.rating = calculateNewRating(partner.metrics);
     await partner.save();
   } else if (status === 'cancelled') {
-    partner?.metrics.cancelledOrders += 1;
-    partner?.currentLoad= Math.max(0,partner.currentLoad-1);
+    partner.metrics.cancelledOrders += 1;
+    partner.currentLoad= Math.max(0,partner.currentLoad-1);
     await partner.save();
   }
 
