@@ -29,7 +29,7 @@ const createNewOrder=asyncHandler( async (req,res)=>{
      const totalAmount= items.reduce((total,item)=>total+item.quantity*item.price,0);
 
      //current time
-     const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+     const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit',timeZone: 'Asia/Kolkata'  });
      console.log('current time order',currentTime)
      const newOrder=new Order({
       orderNumber,
