@@ -15,7 +15,7 @@ const assignDeliveryPartner=asyncHandler(async (req,res)=>{
      //assign order
  
      //current time
-     const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+     const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit',timeZone: 'Asia/Kolkata' });
      console.log("Current Time:", currentTime); ///
 
      const unassignedOrders=await Order.find({
